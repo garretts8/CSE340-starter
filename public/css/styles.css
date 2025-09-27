@@ -4,3 +4,286 @@
 *:after {
   box-sizing: border-box;
 }
+
+body {
+  max-width: 800px;
+  width: 100%;
+  margin: auto;
+  background:
+    repeating-conic-gradient(#000 0 90deg, #fff 90deg 180deg)
+    0/70px 70px;
+}
+
+#wrapper {
+  background-color: white;
+  border: 3px solid #1ABBDC;
+  border-radius: 0.5rem;
+  height: auto;
+  padding: 15px;
+  overflow: hidden;
+  margin: 15px;
+}
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.siteName a {
+  font-size: 2.5em;
+  color: #000;
+  text-decoration: none;
+}
+
+#tools a {
+  font-size: 1.5em;
+  font-variant-caps: small-caps;
+  text-decoration: none;
+  color: #000;
+}
+
+main {
+  align-content: center;
+}
+
+header {
+    padding: 10px;
+    padding-bottom: 20px;
+    margin-top: 10px; 
+    margin-bottom: 30px;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+}
+
+.navigation .navigationul {
+    list-style-type: none;
+    display: flex;
+    background-color: black;
+}
+
+li {
+    flex: 1 1 100%;
+}
+
+.navigationli {
+    flex: 1 1 100%;
+    
+    color: white;
+    padding: 10px;
+}
+
+h1 {
+  font-size: 2.5em;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.deloreanContainer {
+  padding-left: 40px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
+  height: auto;
+  min-height: 250px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.deloreanGrid {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+}
+
+.deloreanGrid:first-child {
+  position: relative;
+  z-index: 2;
+}
+
+.deloreanGrid:last-child {
+  position: relative;
+  z-index: 1;
+  margin-left: -25%;
+}
+
+.deloreanCard {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, .75fr) 1fr;
+  height: 175px;
+  background-color: #e6eceebb;
+  box-sizing: border-box;
+  width: 160px;
+}
+
+.deloreantxtHead {
+  
+  color: #1ABBDC;
+  width: 100%;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.deloreantxt {
+  color: #1ABBDC;
+  width: 100%;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-size: large;
+}
+
+.deloreanbtn {
+  box-shadow:
+    2px 0px 0px 2px #909596,
+    0px -2px 0px 2px #d2d8da;
+  background-color: #1ABBDC;
+  border: #909596;
+  width: 100%;
+  max-width: 130px;
+  font-size: 1em;
+  font-weight: bold;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.deloreanImg {
+  width: 75%;
+  height: auto;
+  min-width: 388px;
+  min-height: 198px;
+  object-fit: contain;
+}
+
+.upgradeReviewsContainer {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.upgrades {
+  display: flex;
+  flex-direction:column;
+  width: auto;
+}
+
+.upgradesGrid {
+  display: grid;
+  grid-template-columns: 1fr .5fr;
+  grid-template-rows: auto auto;
+}
+
+.upgradesCard {
+  text-align: center;
+  padding-top: 15px;
+  width: 90%;
+}
+
+.upgradesImage {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 0.1rem;
+  transition: transform 0.3s ease;
+  background-color: #1ABBDC;
+  width: 100%;
+  height: 90px;
+  align-items: center;
+  justify-content: center;
+}
+
+.upgradesLabel {
+  padding-bottom: 20px;
+  margin: 0px;
+  width: 200px;
+}
+
+.upgradesList li {
+  padding-bottom: 10px;
+}
+  
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.5em;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  .deloreanGrid:first-child {
+    position: relative;
+    z-index: 2;
+  }
+
+  .deloreanGrid:last-child {
+    position: relative;
+    z-index: 1;
+    margin-left: -35%;
+  }
+
+  .deloreanCard {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, .5fr) 0fr 1fr;
+    height: 150px;
+    background-color: #e6eceebb;
+    box-sizing: border-box;
+    width: 140px;
+  }
+
+  .deloreantxtHead {
+    
+    color: #1ABBDC;
+    width: 100%;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    font-size: large;
+    font-weight: bold;
+  }
+
+  .deloreantxt {
+    color: #1ABBDC;
+    width: 100%;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    font-size: medium;
+  }
+
+  .deloreanbtn {
+    box-shadow:
+      2px 0px 0px 2px #909596,
+      0px -2px 0px 2px #d2d8da;
+    background-color: #1ABBDC;
+    border: #909596;
+    width: 100%;
+    max-width: 110px;
+    max-height: 70%;
+    font-size: .75em;
+    font-weight: bold;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+  }
+
+  .deloreanImg {
+    width: 75%;
+    height: auto;
+    min-width: 288px;
+    min-height: 198px;
+    object-fit: contain;
+  }
+
+  .upgradeReviewsContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .upgradeReviewsContainer > *:first-child {
+    order: 2;
+  }
+
+  .upgradeReviewsContainer > *:last-child {
+    order: 1;
+  }
+}
