@@ -1,6 +1,6 @@
-###
+### LocalHost request
 GET http://localhost:5500
 
 
-## Get render
+### Render request
 GET https://cse340-starter-3bjf.onrender.com/
