@@ -1,0 +1,10 @@
+<!-- Uses a EJS code block to contain a JS if structure to determine if
+a "title" variable exits. -->
+<% if (title) { %>
+<!-- if the variable exists, it is displayed within an <h1> element -->
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %>
+<!-- redirects the reponse object to the default index route, to deliver
+     the home view  -->
+
+<%# messages() %> <%- grid %>

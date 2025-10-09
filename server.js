@@ -11,6 +11,7 @@ const app = express()
 const static = require("./routes/static")
 const expressLayouts = require("express-ejs-layouts")
 const baseController = require("./controllers/baseController")
+const inventoryRoute = require("./routes/inventoryRoute")
 
 /* ***********************
  * View Engine and Templates
@@ -29,6 +30,13 @@ app.get ("/", baseController.buildHome)
 //   res.render("index", {title: "Home"})
 // })
 
+// Inventory routes
+/*app.use is an Express function that directs the application to use the resources
+ passed in as parameters. The /inv indicates that a route that contains this word 
+ will use this route file to work in the inventory-related processes. InventoryRoute
+ is the variable representing the inventoryRoute.js file. Any route that starts with
+ /inv will be redirected to the inventoryRoute.js file.*/
+app.use("/inv", inventoryRoute)
 
 /* ***********************
  * Local Server Information
