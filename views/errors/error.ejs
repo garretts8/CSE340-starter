@@ -1,0 +1,30 @@
+<!--<%#- include('../partials/header') %>
+
+<main>
+  <%# if (title) { %>
+  <h1><%#= title %></h1>
+  <p><%#= message %></p>
+  <%# } else { %> <%# res.redirect('/') %> <%# } %>
+</main> -->
+
+<!-- <%# include('../partials/footer') %> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head') %>
+  <body>
+    <div id="wrapper">
+      <%- include('../partials/header') %> <%- include('../partials/navigation')
+      %>
+
+      <main>
+        <% if (title) { %>
+        <h1><%= title %></h1>
+        <p><%- message %></p>
+        <% } else { %> <% res.redirect('/') %> <% } %>
+      </main>
+
+      <%#- include('../partials/footer') %>
+    </div>
+  </body>
+</html>

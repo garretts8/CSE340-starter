@@ -12,6 +12,7 @@ const static = require("./routes/static")
 const expressLayouts = require("express-ejs-layouts")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const utilities = require("./utilities/")
 
 /* ***********************
  * View Engine and Templates
@@ -38,6 +39,30 @@ app.get ("/", baseController.buildHome)
  /inv will be redirected to the inventoryRoute.js file.*/
 app.use("/inv", inventoryRoute)
 
+app.use (async(req, res, next) => {
+  next({status: 404, message: '<h1>Bummer!! Wrong web page!!</h1><img src="/images/404_image/404-error.png"/>'});
+})
+
+/* ***********************
+* Express Error Handler
+* Place after all other middleware
+*************************/
+app.use(async (err, req, res, next) => {
+  let nav = await utilities.getNav()
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+  //calls the "error.ejs" view in an "error" folder.
+  res.render("errors/error", {
+    // sets the value of the "title" for the view. It will use 
+    // the status code or "Server Error" as the title if no status code is set.
+    title: err.status || 'Server Error',
+    /* sets the message to be displayed in the error view to the message 
+    sent in the error object. */
+    message: err.message,
+    // sets the navigation bar for use in the error view.
+    nav
+  })
+})
+
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
@@ -51,3 +76,4 @@ const host = process.env.HOST
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
+

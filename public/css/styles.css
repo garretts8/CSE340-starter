@@ -205,7 +205,8 @@ h1 {
 .upgradesList li {
   padding-bottom: 10px;
 }
-  
+
+ 
 @media (max-width: 640px) {
   h1 {
     font-size: 1.5em;
