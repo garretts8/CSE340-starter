@@ -26,7 +26,7 @@ app.set("layout", "./layouts/layout") // not at views root
  *************************/
 app.use(static)
 //Index route
-app.get ("/", baseController.buildHome)
+app.get ("/", utilities.handleErrors(baseController.buildHome))
 // app.get("/", function (req, res){
 //   res.render("index", {title: "Home"})
 // })
@@ -50,6 +50,7 @@ app.use (async(req, res, next) => {
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   //calls the "error.ejs" view in an "error" folder.
   res.render("errors/error", {
     // sets the value of the "title" for the view. It will use 
@@ -57,7 +58,7 @@ app.use(async (err, req, res, next) => {
     title: err.status || 'Server Error',
     /* sets the message to be displayed in the error view to the message 
     sent in the error object. */
-    message: err.message,
+    message,
     // sets the navigation bar for use in the error view.
     nav
   })
