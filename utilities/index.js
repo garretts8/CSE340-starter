@@ -13,7 +13,7 @@ Util.getNav = async function (req, res, next) {
   //calls the getClassification function from the invModel and stores the resultset 
   //in the data variable
   let data = await invModel.getClassifications()
-  console.log(data)
+  // console.log(data)
   //creates a variable named list and assigns a string(HTML unordered list) to it.
   let list = "<ul>"
   /* the list variable has an additional string added. += is an append operator.
@@ -60,8 +60,11 @@ Util.buildClassificationGrid = async function(data){
       + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
       + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
       grid += '</h2>'
-      grid += '<span>$' 
+      grid += '<span class="price">$' 
       + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
+      grid += '<span class="miles">' 
+      + "   " + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + " " + 'miles</span>'
+      grid += '<span>'
       grid += '</div>'
       grid += '</li>'
     })

@@ -206,7 +206,89 @@ h1 {
   padding-bottom: 10px;
 }
 
- 
+.error-container {
+  display: flex;
+  text-align: center;
+  padding: 2rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+#inv-display li {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#inv-display li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#inv-display img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+#inv-display h2 {
+  margin: 0.5rem 0;
+}
+
+#inv-display h2 a {
+  color: #1ABBDC;
+  text-decoration: none;
+  font-size: 1.25em;
+}
+
+#inv-display h2 a:hover {
+  text-decoration: underline;
+}
+
+#inv-display .namePrice {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#inv-display .price {
+  color: #076c7e;
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+#inv-display .miles {
+  color: #6c757d;
+  font-size: 1em;
+}
+
+#inv-display hr {
+  border: 0;
+  border-top: 1px solid #dee2e6;
+  margin: 1rem 0;
+}
+
+.notice {
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+  padding: 2rem;
+}
+
 @media (max-width: 640px) {
   h1 {
     font-size: 1.5em;
