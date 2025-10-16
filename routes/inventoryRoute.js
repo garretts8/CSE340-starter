@@ -7,11 +7,10 @@ const router = new express.Router()
 const invController = require("../controllers/invController")
 
 // Route to build inventory by classification view
-/*The route, which is divided into three elements: 
-GET method, the route being watch for(/type/:classificationId), 
-and the handler (invController.buildByClassificationId -  will be used to 
-fulfill the request sent by the route. */
 router.get("/type/:classificationId", invController.buildByClassificationId);
+
+// Route to build vehicle detail view
+router.get("/detail/:inventoryId", invController.buildByInventoryId)
 
 //exports the router object for use elsewhere.
 module.exports = router;

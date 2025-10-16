@@ -1,4 +1,3 @@
-
 //Requires the inventory-model(invModel) file to get data
 const invModel = require("../models/inventory-model")
 //create an empty Util object
@@ -62,9 +61,9 @@ Util.buildClassificationGrid = async function(data){
       grid += '</h2>'
       grid += '<span class="price">$' 
       + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
-      grid += '<span class="miles">' 
-      + "   " + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + " " + 'miles</span>'
-      grid += '<span>'
+      // grid += '<span class="miles">' 
+      // + "   " + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + " " + 'miles</span>'
+      // grid += '<span>'
       grid += '</div>'
       grid += '</li>'
     })
@@ -73,6 +72,50 @@ Util.buildClassificationGrid = async function(data){
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
   return grid
+}
+
+/* **************************************
+* Build the vehicle detail view HTML
+* ************************************ */
+Util.buildVehicleDetail = async function(vehicle){
+  let detailHTML = ''
+    if(vehicle){
+    detailHTML += '<section class="vehicle-detail">'
+    detailHTML += '<div class="vehicle-content">'
+    detailHTML += '<div class="vehicle-image">'
+    detailHTML += '<img src="' + vehicle.inv_image + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model + '" />'
+    detailHTML += '</div>'
+    
+    detailHTML += '<div class="vehicle-info">'
+    detailHTML += '<h2>' + vehicle.inv_make + ' ' + vehicle.inv_model + ' Details</h2>'
+    detailHTML += '<div class="vehicle-details-grid">'
+    detailHTML += '<div class="detail-item">'
+    detailHTML += '<span class="detail-label">Price: </span>'
+    detailHTML += '<span class="detail-value">$' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
+    detailHTML += '</div>'
+    
+    detailHTML += '<div class="detail-item">'
+    detailHTML += '<span class="detail-label">Description: </span>'
+    detailHTML += '<span class="detail-value">' + vehicle.inv_description + '</span>'
+    detailHTML += '</div>'
+    
+    detailHTML += '<div class="detail-item">'
+    detailHTML += '<span class="detail-label">Color: </span>'
+    detailHTML += '<span class="detail-value">' + vehicle.inv_color + '</span>'
+    detailHTML += '</div>'
+    
+    detailHTML += '<div class="detail-item">'
+    detailHTML += '<span class="detail-label">Miles: </span>'
+    detailHTML += '<span class="detail-value">' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</span>'
+    detailHTML += '</div>'
+    detailHTML += '</div>' 
+    detailHTML += '</div>' 
+    detailHTML += '</section>' 
+  } else {
+    detailHTML += '<p class="notice">Sorry, no vehicle details could be found.</p>'
+  }
+  
+  return detailHTML
 }
 
 /* ****************************************
