@@ -372,6 +372,10 @@ h1 {
   line-height: 1.3;
 }
 
+.error-link {
+  text-decoration: none;
+  color: #1ABBDC; 
+}
 
 
 @media (max-width: 640px) {

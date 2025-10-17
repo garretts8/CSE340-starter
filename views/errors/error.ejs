@@ -2,16 +2,11 @@
 <html lang="en">
   <%- include('../partials/head') %>
   <body>
-    <div id="wrapper">
-      <%- include('../partials/header') %> <%-
-      include('../partials/navigation')%>
-
-      <main class="error-container">
-        <% if (title) { %>
-        <h1><%= title %></h1>
-        <p><%- message %></p>
-        <% } else { %> <% res.redirect('/') %> <% } %>
-      </main>
-    </div>
+    <main class="error-container">
+      <% if (title) { %>
+      <h1><%= title %></h1>
+      <p><%- message %></p>
+      <% } else { %> <% res.redirect('/') %> <% } %>
+    </main>
   </body>
 </html>

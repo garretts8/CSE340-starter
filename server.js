@@ -13,13 +13,20 @@ const expressLayouts = require("express-ejs-layouts")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/")
+const errorRoute = require("./routes/errorRoute")
+
+/* ***********************
+ * Middleware
+ *************************/
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 /* ***********************
  * View Engine and Templates
  *************************/
 app.set("view engine", "ejs")
 app.use(expressLayouts)
-app.set("layout", "./layouts/layout") // not at views root
+app.set("layout", "./layouts/layout") 
 
 /* ***********************
  * Routes
@@ -39,9 +46,12 @@ app.get ("/", utilities.handleErrors(baseController.buildHome))
  /inv will be redirected to the inventoryRoute.js file.*/
 app.use("/inv", inventoryRoute)
 
+app.use("/error", errorRoute)
+
 app.use (async(req, res, next) => {
   next({status: 404, message: '<h1>Bummer!! Wrong web page!!</h1><img src="/images/404_image/404-error.png"/>'});
 })
+
 
 /* ***********************
 * Express Error Handler
@@ -50,6 +60,8 @@ app.use (async(req, res, next) => {
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+
+  
   if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   //calls the "error.ejs" view in an "error" folder.
   res.render("errors/error", {
