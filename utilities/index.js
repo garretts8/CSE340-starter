@@ -48,7 +48,7 @@ Util.buildClassificationGrid = async function(data){
     data.forEach(vehicle => { 
       grid += '<li>'
       grid +=  '<img src="' + vehicle.inv_thumbnail 
-      +'" alt="' + "Image of " + vehicle.inv_make + ' ' + vehicle.inv_model +'" />'
+      +'" alt="' + vehicle.inv_make + ' ' + vehicle.inv_model +'" />'
       grid += '<div class="namePrice">'
       grid += '<hr />'
       grid += '<h2>'
@@ -78,7 +78,7 @@ Util.buildVehicleDetail = async function(vehicle){
     detailHTML += '<section class="vehicle-detail">'
     detailHTML += '<div class="vehicle-content">'
     detailHTML += '<div class="vehicle-image">'
-    detailHTML += '<img src="' + vehicle.inv_image + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model + '" />'
+    detailHTML += '<img src="' + vehicle.inv_image + '" alt="' + vehicle.inv_make + ' ' + vehicle.inv_model + '" />'
     detailHTML += '</div>'
     
     detailHTML += '<div class="vehicle-info">'
