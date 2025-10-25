@@ -1,0 +1,46 @@
+<% if (title) { %><% } %>
+<main>
+  <h1><%= title %></h1>
+  <%- messages() %>
+
+  <div class="login-container">
+    <form action="/account/login" method="post" class="login-form">
+      <div class="form-group">
+        <p>All fields are required</p>
+        <label for="account_email">Email:</label>
+        <input
+          type="email"
+          id="account_email"
+          name="account_email"
+          placeholder="Enter your email address"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="account_password">Password:</label>
+        <input
+          type="password"
+          id="account_password"
+          name="account_password"
+          placeholder="Enter your password"
+          pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+          required
+        />
+        <p class="password-requirements">
+          Passwords must be a minimum of 12 characters and include 1 capital
+          letter, 1 number and 1 special character
+        </p>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">LOGIN</button>
+      </div>
+    </form>
+
+    <div class="register-link">
+      <p>
+        No account?
+        <a href="/account/register" title="Create a new account">Sign-up</a>
+      </p>
+    </div>
+  </div>
+</main>

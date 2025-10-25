@@ -9,7 +9,6 @@ errorController.triggerError = async function(req, res, next) {
     const error = new Error("Intentional 500 Error - Test Error Handling")
     error.status = 500
     throw error
-    
 }
 
 /* ***************************

@@ -377,6 +377,183 @@ h1 {
   color: #157083; 
 }
 
+.notice {
+  color: red;
+}
+
+/* Account View Styles */
+.login-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 30px;
+  background-color: #e6eceebb;
+  border-radius: 0.5rem;
+  border: 2px solid #1ABBDC;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.login-form {
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: 1.1em;
+  font-variant-caps: small-caps;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #909596;
+  border-radius: 0.3rem;
+  font-size: 1em;
+  box-sizing: border-box;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #1ABBDC;
+  box-shadow: 0 0 0 3px rgba(26, 187, 220, 0.2);
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #1ABBDC;
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-variant-caps: small-caps;
+  box-shadow: 
+    2px 0px 0px 2px #909596,
+    0px -2px 0px 2px #d2d8da;
+}
+
+.btn:hover {
+  background-color: #157083;
+  transform: translateY(-2px);
+  box-shadow: 
+    2px 2px 0px 2px #909596,
+    0px -2px 0px 2px #d2d8da;
+}
+
+.btn-primary {
+  background-color: #1ABBDC;
+  width: 50%;
+  margin-top: 10px;
+  justify-content: center;
+  max-width: 200px;
+
+}
+
+.btn-primary:hover {
+  background-color: #157083;
+}
+
+.register-container {
+    padding: 30px;
+    background-color: #e6eceebb;
+    border-radius: 0.5rem;
+    border: 2px solid #1ABBDC;
+  }
+  
+.register-link {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 2px solid #909596;
+  margin-top: 20px;
+  background-color: #e6eceebb;
+}
+
+.register-link p {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.1em;
+}
+
+.register-link a {
+  color: #1ABBDC;
+  text-decoration: none;
+  font-weight: bold;
+  font-variant-caps: small-caps;
+  transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+  color: #157083;
+  text-decoration: underline;
+}
+
+/* Account Management Styles (for future use) */
+.account-management {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 30px;
+  background-color: #e6eceebb;
+  border-radius: 0.5rem;
+  border: 2px solid #1ABBDC;
+}
+
+.account-info {
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: white;
+  border-radius: 0.3rem;
+  border: 1px solid #909596;
+}
+
+.account-actions {
+  display: grid;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.password-group .password-input-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.password-group input[type="password"],
+.password-group input[type="text"] {
+  flex: 1;
+  min-width: 0; /* Allows the input to shrink properly */
+}
+
+.show-password-btn {
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 8px;
+  max-width: 200px;
+}
+
+/* For the login form as well */
+.login-form .password-input-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.login-form input[type="password"],
+.login-form input[type="text"] {
+  flex: 1;
+}
 
 @media (max-width: 640px) {
   h1 {
@@ -506,7 +683,40 @@ h1 {
     margin-top: 50px;
   }
 
+   .login-container {
+    margin: 1rem;
+    padding: 20px;
+    max-width: none;
+  }
+  
+  .form-group {
+    padding: 0 5px;
+  }
+  
+  .form-group input {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+  
+  .btn {
+    padding: 10px 25px;
+    font-size: 1em;
+    min-width: 110px;
+  }
+  
+  .register-link p {
+    font-size: 1em;
+  }
+
+  .register-container {
+    padding: 30px;
+    background-color: #e6eceebb;
+    border-radius: 0.5rem;
+    border: 2px solid #1ABBDC;
+  }
 }
+
+
 
 @media (max-width: 480px) {
   #inv-display {
@@ -518,4 +728,24 @@ h1 {
     font-size: 0.8em;
     padding: 10px 4px;
   }
+
+  .login-container {
+    margin: 0.5rem;
+    padding: 15px;
+  }
+  
+  .form-group label {
+    font-size: 1em;
+  }
+  
+  .btn {
+    padding: 8px 20px;
+    font-size: 0.9em;
+    min-width: 100px;
+  }
+  
+  .form-group.button-group {
+    text-align: center;
+  }
+
 }
