@@ -1,0 +1,256 @@
+<% if (title) { %><% } %>
+<main>
+  <h1><%= title %></h1>
+  <%- messages() %> <% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
+
+  <div class="form-container">
+    <form
+      action="/inv/add-inventory"
+      method="post"
+      class="inventory-form"
+      id="inventoryForm"
+    >
+      <p>All fields are required</p>
+
+      <div class="form-group">
+        <label for="classification_id">Classification:</label>
+        <%- classificationList %>
+      </div>
+
+      <div class="form-group">
+        <label for="inv_make">Make:</label>
+        <input
+          type="text"
+          id="inv_make"
+          name="inv_make"
+          placeholder="Enter vehicle make"
+          required
+          minlength="1"
+          value="<%= locals.inv_make || '' %>"
+          class="validation-input"
+        />
+        <span class="field-instructions">Required field</span>
+      </div>
+
+      <div class="form-group">
+        <label for="inv_model">Model:</label>
+        <input
+          type="text"
+          id="inv_model"
+          name="inv_model"
+          placeholder="Enter vehicle model"
+          required
+          minlength="1"
+          value="<%= locals.inv_model || '' %>"
+          class="validation-input"
+        />
+        <span class="field-instructions">Required field</span>
+      </div>
+
+      <div class="form-group">
+        <label for="inv_description">Description:</label>
+        <textarea
+          id="inv_description"
+          name="inv_description"
+          placeholder="Enter vehicle description"
+          required
+          minlength="1"
+          class="validation-input"
+        >
+        <%= locals.inv_description || '' %></textarea
+        >
+        <span class="field-instructions">Required field</span>
+      </div>
+
+      <div class="form-group">
+        <label for="inv_image">Image Path:</label>
+        <input
+          type="text"
+          id="inv_image"
+          name="inv_image"
+          placeholder="Enter image path"
+          required
+          minlength="1"
+          value="<%= locals.inv_image || '/images/vehicles/no-image.png' %>"
+          class="validation-input"
+        />
+        <span class="field-instructions">Required field</span>
+      </div>
+
+      <div class="form-group">
+        <label for="inv_thumbnail">Thumbnail Path:</label>
+        <input
+          type="text"
+          id="inv_thumbnail"
+          name="inv_thumbnail"
+          placeholder="Enter thumbnail path"
+          required
+          minlength="1"
+          value="<%= locals.inv_thumbnail || '/images/vehicles/no-image-tn.png' %>"
+          class="validation-input"
+        />
+        <span class="field-instructions">Required field</span>
+      </div>
+
+      <div class="form-group">
+        <label for="inv_price">Price:</label>
+        <input
+          type="number"
+          id="inv_price"
+          name="inv_price"
+          placeholder="Enter vehicle price"
+          step="0.01"
+          min="0"
+          required
+          value="<%= locals.inv_price || '' %>"
+          class="validation-input"
+        />
+        <span class="field-instructions">Must be a positive number</span>
+      </div>
+
+      <div class="form-group">
+        <label for="inv_year">Year:</label>
+        <input
+          type="number"
+          id="inv_year"
+          name="inv_year"
+          placeholder="Enter vehicle year"
+          min="1900"
+          max="2030"
+          required
+          value="<%= locals.inv_year || '' %>"
+          class="validation-input"
+        />
+        <span class="field-instructions">Must be between 1900-2030</span>
+      </div>
+
+      <div class="form-group">
+        <label for="inv_miles">Miles:</label>
+        <input
+          type="number"
+          id="inv_miles"
+          name="inv_miles"
+          placeholder="Enter vehicle mileage"
+          min="0"
+          required
+          value="<%= locals.inv_miles || '' %>"
+          class="validation-input"
+        />
+        <span class="field-instructions">Must be a positive number</span>
+      </div>
+
+      <div class="form-group">
+        <label for="inv_color">Color:</label>
+        <input
+          type="text"
+          id="inv_color"
+          name="inv_color"
+          placeholder="Enter vehicle color"
+          required
+          minlength="1"
+          value="<%= locals.inv_color || '' %>"
+          class="validation-input"
+        />
+        <span class="field-instructions">Required field</span>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add Inventory</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("inventoryForm");
+    const inputs = form.querySelectorAll(".validation-input");
+    const classificationSelect = document.getElementById("classificationList");
+
+    // Function to validate a field and apply visual feedback
+    function validateField(field) {
+      // Remove existing validation classes
+      field.classList.remove("valid", "invalid");
+
+      // Check if field meets requirements
+      if (field.checkValidity()) {
+        field.classList.add("valid");
+      } else {
+        field.classList.add("invalid");
+      }
+    }
+
+    // Add real-time validation to all input fields
+    inputs.forEach((input) => {
+      // Validate when user types
+      input.addEventListener("input", function () {
+        validateField(this);
+      });
+
+      // Validate when user leaves the field
+      input.addEventListener("blur", function () {
+        validateField(this);
+      });
+    });
+
+    // Add validation to classification select
+    if (classificationSelect) {
+      classificationSelect.addEventListener("change", function () {
+        validateField(this);
+      });
+
+      // Add validation class to select for consistent styling
+      classificationSelect.classList.add("validation-input");
+    }
+
+    // Validate all fields on form submission
+    form.addEventListener("submit", function (event) {
+      let formIsValid = true;
+
+      // Validate all inputs
+      inputs.forEach((input) => {
+        validateField(input);
+        if (!input.checkValidity()) {
+          formIsValid = false;
+        }
+      });
+
+      // Validate classification select
+      if (classificationSelect && !classificationSelect.value) {
+        classificationSelect.classList.add("invalid");
+        formIsValid = false;
+      } else if (classificationSelect && classificationSelect.value) {
+        classificationSelect.classList.add("valid");
+      }
+
+      // Prevent form submission if invalid
+      if (!formIsValid) {
+        event.preventDefault();
+        // Focus on first invalid field
+        const firstInvalid = form.querySelector(".invalid");
+        if (firstInvalid) {
+          firstInvalid.focus();
+        }
+      }
+    });
+
+    const hasServerErrors = document.querySelector(".notice") !== null;
+    if (hasServerErrors) {
+      // Small delay to ensure DOM is fully ready
+      setTimeout(() => {
+        inputs.forEach((input) => {
+          validateField(input);
+        });
+        if (classificationSelect) {
+          validateField(classificationSelect);
+        }
+      }, 100);
+    }
+  });
+</script>

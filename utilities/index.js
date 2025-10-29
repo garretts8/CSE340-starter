@@ -113,91 +113,23 @@ Util.buildVehicleDetail = async function(vehicle){
   return detailHTML
 }
 
-// /* **************************************
-// * Build the account view HTML
-// * ************************************ */
-// Util.buildLogin = async function(account){
-//   let loginHTML = ''
-//   loginHTML += '<div class="login-container">'
-//   loginHTML += '<form action="/account/login" method="post" class="login-form">'
-//   loginHTML += '<div class="form-group">'
-//   loginHTML += '<label for="account_email">Email:</label>'
-//   loginHTML += '<input type="email" id="account_email" name="account_email" placeholder="Enter your email address" required>'
-//   loginHTML += '</div>'
-//   loginHTML += '<div class="form-group">'
-//   loginHTML += '<label for="account_password">Password:</label>'
-//   loginHTML += '<input type="password" id="account_password" name="account_password" placeholder="Enter your password" required>'
-//   loginHTML += '</div>'
-//   loginHTML += '<div class="form-group">'
-//   loginHTML += '<button type="submit" class="btn btn-primary">LOGIN</button>'
-//   loginHTML += '</div>'
-//   loginHTML += '</form>'
-//   loginHTML += '<div class="register-link">'
-//   loginHTML += '<p>No account? <a href="/account/register" title="Create a new account">Sign-up</a></p>'
-//   loginHTML += '</div>'
-//   loginHTML += '</div>'
-  
-//   return loginHTML
-// }
-
-// /* **************************************
-// * Build the register view HTML
-// * ************************************ */
-// Util.buildRegister = async function(register){
-//   let registerHTML = ''
-//   registerHTML += '<div class="register-container">'
-//   registerHTML += '<form action="/account/register" method="post" class="registration-form">'
-//   registerHTML += '<div class="form-group">'
-//   registerHTML += '<label for="account_firstname">First name:</label>'
-//   registerHTML += '<input type="text" id="account_firstname" name="account_firstname" placeholder="Enter your first name" required>'
-//   registerHTML += '</div>'
-//   registerHTML += '<div class="form-group">'
-//   registerHTML += '<label for="account_lastname">Last name:</label>'
-//   registerHTML += '<input type="text" id="account_lastname" name="account_lastname" placeholder="Enter your last name" required>'
-//   registerHTML += '</div>'
-//   registerHTML += '<div class="form-group">'
-//   registerHTML += '<label for="account_email">Email Address:</label>'
-//   registerHTML += '<input type="email" id="account_email" name="account_email" placeholder="Enter your email address" required>'
-//   registerHTML += '</div>'
-//   registerHTML += '<div class="form-group password-group">'
-//   registerHTML += '<label for="account_password">Password:</label>'
-//   registerHTML += '<div class="password-input-container">'
-//   registerHTML += '<input type="password" id="account_password" name="account_password" placeholder="Enter your password" required>'
-//   registerHTML += '<button type="button" id="pswdBtn" class="btn btn-secondary show-password-btn">Show Password</button>'
-//   registerHTML += '</div>'
-//   registerHTML += '</div>'
-//   registerHTML += '<div class="form-group">'
-//   registerHTML += '<p>Passwords must be a minimum of 12 characters and include 1 capital letter, 1 number and 1 special character</p>'
-//   registerHTML += '</div>'
-//   registerHTML += '<div class="form-group">'
-//   registerHTML += '<button type="submit" class="btn btn-primary">Register</button>'
-//   registerHTML += '</div>'
-//   registerHTML += '</form>'
-//   registerHTML += '<div class="register-link">'
-//   registerHTML += '<p>No account? <a href="/account/register" title="Create a new account">Sign-up</a></p>'
-//   registerHTML += '</div>'
-//   registerHTML += '</div>'
-  
-//     // Adding JavaScript for show password functionality
-//   registerHTML += `
-//   <script>
-//     const pswdBtn = document.querySelector("#pswdBtn");
-//     pswdBtn.addEventListener("click", function() {
-//       const pswdInput = document.getElementById("account_password");
-//       const type = pswdInput.getAttribute("type");
-//       if(type == "password"){
-//         pswdInput.setAttribute("type", "text");
-//         pswdBtn.innerHTML = "Hide Password";
-//       } else {
-//         pswdInput.setAttribute("type", "password");
-//         pswdBtn.innerHTML = "Show Password";
-//       }
-//     });
-//   </script>
-//   `
-  
-//   return registerHTML
-// }
+/* ****************************************
+ * Build classification select list
+ * *************************************** */
+Util.buildClassificationList = async function (classification_id = null) {
+    let data = await invModel.getClassifications()
+    let classificationList = '<select name="classification_id" id="classificationList" required>'
+    classificationList += "<option value=''>Choose a Classification</option>"
+    data.rows.forEach((row) => {
+        classificationList += '<option value="' + row.classification_id + '"'
+        if (classification_id != null && row.classification_id == classification_id) {
+            classificationList += " selected "
+        }
+        classificationList += ">" + row.classification_name + "</option>"
+    })
+    classificationList += "</select>"
+    return classificationList
+}
 
 /* ****************************************
  * Middleware For Handling Errors

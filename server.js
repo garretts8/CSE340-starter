@@ -35,6 +35,7 @@ app.use(express.urlencoded({ extended: true }))
     pool,
   }),
   secret: process.env.SESSION_SECRET,
+  
   resave: true,
   saveUninitialized: true,
   name: 'sessionId',
