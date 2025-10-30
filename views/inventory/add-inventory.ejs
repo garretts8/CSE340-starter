@@ -178,7 +178,17 @@
       // Remove existing validation classes
       field.classList.remove("valid", "invalid");
 
-      // Check if field meets requirements
+      // Special handling for select element
+      if (field === classificationSelect) {
+        if (field.value && field.value !== "") {
+          field.classList.add("valid");
+        } else {
+          field.classList.add("invalid");
+        }
+        return;
+      }
+
+      // For input fields, check HTML5 validation
       if (field.checkValidity()) {
         field.classList.add("valid");
       } else {
@@ -188,6 +198,9 @@
 
     // Add real-time validation to all input fields
     inputs.forEach((input) => {
+      // Initial validation on page load
+      validateField(input);
+
       // Validate when user types
       input.addEventListener("input", function () {
         validateField(this);
@@ -197,10 +210,18 @@
       input.addEventListener("blur", function () {
         validateField(this);
       });
+
+      // Also validate on invalid event (when browser shows error)
+      input.addEventListener("invalid", function () {
+        validateField(this);
+      });
     });
 
     // Add validation to classification select
     if (classificationSelect) {
+      // Initial validation
+      validateField(classificationSelect);
+
       classificationSelect.addEventListener("change", function () {
         validateField(this);
       });
@@ -209,37 +230,17 @@
       classificationSelect.classList.add("validation-input");
     }
 
-    // Validate all fields on form submission
-    form.addEventListener("submit", function (event) {
-      let formIsValid = true;
-
-      // Validate all inputs
+    // Re-validate all fields when form is submitted (to catch any missed ones)
+    form.addEventListener("submit", function () {
       inputs.forEach((input) => {
         validateField(input);
-        if (!input.checkValidity()) {
-          formIsValid = false;
-        }
       });
-
-      // Validate classification select
-      if (classificationSelect && !classificationSelect.value) {
-        classificationSelect.classList.add("invalid");
-        formIsValid = false;
-      } else if (classificationSelect && classificationSelect.value) {
-        classificationSelect.classList.add("valid");
-      }
-
-      // Prevent form submission if invalid
-      if (!formIsValid) {
-        event.preventDefault();
-        // Focus on first invalid field
-        const firstInvalid = form.querySelector(".invalid");
-        if (firstInvalid) {
-          firstInvalid.focus();
-        }
+      if (classificationSelect) {
+        validateField(classificationSelect);
       }
     });
 
+    // Apply initial validation if there were server-side errors
     const hasServerErrors = document.querySelector(".notice") !== null;
     if (hasServerErrors) {
       // Small delay to ensure DOM is fully ready
