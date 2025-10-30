@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <%- include('../partials/head') %>
-  <body>
-    <main class="error-container">
-      <% if (title) { %>
-      <h1><%= title %></h1>
-      <p><%- message %></p>
-      <% } else { %> <% res.redirect('/') %> <% } %>
-    </main>
-  </body>
-</html>
+<div class="error-container">
+  <% if (title) { %>
+  <h1><%= title %></h1>
+  <p><%- message %></p>
+  <% } else { %> <% res.redirect('/') %> <% } %>
+</div>
