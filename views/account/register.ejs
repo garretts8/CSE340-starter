@@ -10,7 +10,12 @@
 <% } %>
 
 <div class="register-container">
-  <form action="/account/register" method="post" class="registration-form">
+  <form
+    action="/account/register"
+    method="post"
+    class="registration-form"
+    id="registrationForm"
+  >
     <p>All fields are required</p>
     <div class="form-group">
       <label for="account_firstname">First name:</label>
@@ -21,6 +26,7 @@
         placeholder="Enter your first name"
         required
         value="<%= locals.account_firstname %>"
+        class="validation-input"
       />
     </div>
 
@@ -33,6 +39,7 @@
         placeholder="Enter your last name"
         required
         value="<%= locals.account_lastname || '' %>"
+        class="validation-input"
       />
     </div>
 
@@ -45,6 +52,7 @@
         placeholder="Enter your email address"
         required
         value="<%= locals.account_email || '' %>"
+        class="validation-input"
       />
     </div>
 
@@ -58,6 +66,7 @@
           placeholder="Enter your password"
           pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
           required
+          class="validation-input"
         />
         <button
           type="button"
@@ -87,6 +96,64 @@
 </div>
 
 <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("registrationForm");
+    const inputs = form.querySelectorAll(".validation-input");
+
+    // Function to validate a field and apply visual feedback
+    function validateField(field) {
+      // Remove existing validation classes
+      field.classList.remove("valid", "invalid");
+
+      // Check if field meets requirements
+      if (field.checkValidity()) {
+        field.classList.add("valid");
+      } else {
+        field.classList.add("invalid");
+      }
+    }
+
+    // Add real-time validation to all input fields
+    inputs.forEach((input) => {
+      // Initial validation on page load
+      validateField(input);
+
+      // Validate when user types
+      input.addEventListener("input", function () {
+        validateField(this);
+      });
+
+      // Validate when user leaves the field
+      input.addEventListener("blur", function () {
+        validateField(this);
+      });
+
+      // Also validate on invalid event (when browser shows error)
+      input.addEventListener("invalid", function () {
+        validateField(this);
+      });
+    });
+
+    // Re-validate all fields when form is submitted (to catch any missed ones)
+    form.addEventListener("submit", function () {
+      inputs.forEach((input) => {
+        validateField(input);
+      });
+    });
+
+    // Apply initial validation if there were server-side errors
+    const hasServerErrors = document.querySelector(".notice") !== null;
+    if (hasServerErrors) {
+      // Small delay to ensure DOM is fully ready
+      setTimeout(() => {
+        inputs.forEach((input) => {
+          validateField(input);
+        });
+      }, 100);
+    }
+  });
+
+  // Existing password show/hide functionality
   const pswdBtn = document.querySelector("#pswdBtn");
   if (pswdBtn) {
     pswdBtn.addEventListener("click", function () {
