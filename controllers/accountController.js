@@ -89,13 +89,44 @@ async function processLogin(req, res) {
   const { account_email, account_password } = req.body
 
   try {
-  // For now, redirect to home page
+    // Check if the email exists in the database
+    const accountData = await accountModel.getAccountByEmail(account_email)
+
+    if (!accountData) {
+      req.flash("notice", "Invalid email or password.")
+      return res.status(400).render("account/login", {
+        title: "Login",
+        nav,
+        errors: null,
+        account_email
+      })
+    }
+
+    // Verify the password
+    const passwordMatch = await bcrypt.compare(account_password, accountData.account_password)
+    
+    if (!passwordMatch) {
+      req.flash("notice", "Invalid email or password.")
+      return res.status(400).render("account/login", {
+        title: "Login",
+        nav,
+        errors: null,
+        account_email
+      })
+    }
+
+  //Login successful
     req.flash("notice", "Login successful!")
     res.redirect("/")
      } catch (error) {
     console.error("Login error:", error)
     req.flash("notice", "Login failed. Please try again.")
-    res.redirect("/account/login")
+     res.status(500).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+      account_email
+    })
   }
 }
 

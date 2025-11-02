@@ -62,28 +62,12 @@ const utilities = require("../utilities")
  * ************************************************************* */
 validate.checkRegData = async (req, res, next) => {
   const { account_firstname, account_lastname, account_email } = req.body
-  let errors = validationResult(req)
-  
+  let errors = []
+  errors = validationResult(req)
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
-    
-    // Remove duplicate "Invalid value" messages
-    const errorMap = new Map();
-    errors.array().forEach(error => {
-      // Group by field and keep only the most relevant message
-      if (!errorMap.has(error.path) || 
-          !error.msg.includes('Invalid value')) {
-        errorMap.set(error.path, error);
-      }
-    });
-    
-    const filteredErrors = {
-      ...errors,
-      array: () => Array.from(errorMap.values())
-    };
-
     res.render("account/register", {
-      errors: filteredErrors,
+      errors,
       title: "Registration",
       nav,
       account_firstname,
