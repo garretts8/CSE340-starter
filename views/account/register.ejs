@@ -25,9 +25,11 @@
         name="account_firstname"
         placeholder="Enter your first name"
         required
+        minlength="1"
         value="<%= locals.account_firstname %>"
         class="validation-input"
       />
+      <span class="field-instructions">Required field</span>
     </div>
 
     <div class="form-group">
@@ -38,9 +40,11 @@
         name="account_lastname"
         placeholder="Enter your last name"
         required
+        minlength="1"
         value="<%= locals.account_lastname || '' %>"
         class="validation-input"
       />
+      <span class="field-instructions">Required field</span>
     </div>
 
     <div class="form-group">
@@ -54,6 +58,7 @@
         value="<%= locals.account_email || '' %>"
         class="validation-input"
       />
+      <span class="field-instructions">Required field</span>
     </div>
 
     <div class="form-group password-group">

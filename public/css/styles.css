@@ -637,6 +637,44 @@ h1 {
     box-shadow: 0 0 0 3px rgba(26, 187, 220, 0.2);
 }
 
+/* Account Management */
+.centered-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 200px;
+}
+
+.welcome-message {
+  max-width: 400px;
+  padding: 30px;
+  background-color: #e6eceebb;
+  border-radius: 0.5rem;
+  border: 2px solid #1ABBDC;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.welcome-text {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-variant-caps: small-caps;
+}
+
+.welcome-subtext {
+  font-size: 1.1em;
+  color: #2c3e50;
+  line-height: 1.5;
+}
+
+
 @media (max-width: 640px) {
   h1 {
     font-size: 1.8em;

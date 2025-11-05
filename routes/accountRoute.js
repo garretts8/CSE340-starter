@@ -20,8 +20,10 @@ router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkLoginData,
-  utilities.handleErrors(accountController.processLogin)  
+  utilities.handleErrors(accountController.accountLogin)  
 )
+
+// Account management route
+router.get("/", utilities.handleErrors(accountController.buildManagement))
  
 module.exports = router;
-

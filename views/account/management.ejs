@@ -1,0 +1,17 @@
+<% if (title) { %><% } %>
+
+<h1 class="centered-title"><%= title %></h1>
+<%- messages() %> <% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<div class="account-management-container centered-content">
+  <div class="welcome-message">
+    <p class="welcome-text">You're logged in!</p>
+    <p class="welcome-subtext">Welcome to your account management page.</p>
+  </div>
+</div>

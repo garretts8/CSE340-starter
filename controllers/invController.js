@@ -163,5 +163,3 @@ invCont.addInventory = async function (req, res, next) {
 /* Brings inventory-model.js file into scope and stores its functionality
 into a invModel variable */
 module.exports = invCont
-
-

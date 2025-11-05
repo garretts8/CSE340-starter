@@ -62,12 +62,29 @@ const utilities = require("../utilities")
  * ************************************************************* */
 validate.checkRegData = async (req, res, next) => {
   const { account_firstname, account_lastname, account_email } = req.body
-  let errors = []
-  errors = validationResult(req)
+  let errors = validationResult(req)
+
+  //Check if there are any validation errors
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
+
+// Remove duplicate "Invalid value" messages - same as inventory validation
+    const errorMap = new Map();
+    errors.array().forEach(error => {
+      // Group by field and keep only the most relevant message
+      if (!errorMap.has(error.path) || 
+          !error.msg.includes('Invalid value')) {
+        errorMap.set(error.path, error);
+      }
+    });
+    
+    const filteredErrors = {
+      ...errors,
+      array: () => Array.from(errorMap.values())
+    }
+
     res.render("account/register", {
-      errors,
+       errors: filteredErrors,
       title: "Registration",
       nav,
       account_firstname,
@@ -106,12 +123,27 @@ validate.loginRules = () => {
  * ***************************** */
 validate.checkLoginData = async (req, res, next) => {
   const { account_email } = req.body
-  let errors = []
-  errors = validationResult(req)
+  let errors = validationResult(req)
+
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
+
+    // Remove duplicate "Invalid value" messages for login as well
+    const errorMap = new Map();
+    errors.array().forEach(error => {
+      if (!errorMap.has(error.path) || 
+          !error.msg.includes('Invalid value')) {
+        errorMap.set(error.path, error);
+      }
+    });
+    
+    const filteredErrors = {
+      ...errors,
+      array: () => Array.from(errorMap.values())
+    }
+
     res.render("account/login", {
-      errors,
+      errors: filteredErrors,
       title: "Login",
       nav,
       account_email,
