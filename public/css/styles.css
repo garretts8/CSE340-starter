@@ -729,7 +729,7 @@ h1 {
 
 #classificationList {
   width: 100%;
-  max-width: 400px;
+  max-width: 700px;
   margin: 0 auto 20px auto;
   display: block;
   padding: 12px;
@@ -772,6 +772,69 @@ h1 {
 
 #inventoryDisplay tr:hover {
   background-color: #f5f5f5;
+}
+
+.form-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 30px;
+  background-color: #e6eceebb;
+  border-radius: 0.5rem;
+  border: 2px solid #1ABBDC;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.inventory-form p {
+  font-size: 1.1em;
+  color: #2c3e50;
+  margin-bottom: 25px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Classification Select Styling */
+#classificationList {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #909596;
+  border-radius: 0.3rem;
+  font-size: 1em;
+  box-sizing: border-box;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+#classificationList:focus {
+  outline: none;
+  border-color: #1ABBDC;
+  box-shadow: 0 0 0 3px rgba(26, 187, 220, 0.2);
+}
+
+/* Textarea Styling */
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #909596;
+  border-radius: 0.3rem;
+  font-size: 1em;
+  box-sizing: border-box;
+  background-color: white;
+  transition: all 0.3s ease;
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+}
+
+.form-group textarea:focus {
+  outline: none;
+  border-color: #1ABBDC;
+  box-shadow: 0 0 0 3px rgba(26, 187, 220, 0.2);
+}
+
+/* Button Styling */
+.form-group:last-child {
+  text-align: center;
+  margin-top: 10px;
 }
 
 @media (max-width: 640px) {
@@ -933,6 +996,28 @@ h1 {
     border-radius: 0.5rem;
     border: 2px solid #1ABBDC;
   }
+
+    .form-container {
+    margin: 1rem;
+    padding: 20px;
+    max-width: none;
+  }
+  
+  .form-group {
+    padding: 0 5px;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+  
+  .inventory-form p {
+    font-size: 1em;
+  }
+
 }
 
 
@@ -967,4 +1052,24 @@ h1 {
     text-align: center;
   }
 
+  .form-container {
+    margin: 0.5rem;
+    padding: 15px;
+  }
+  
+  .form-group label {
+    font-size: 1em;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 8px;
+    font-size: 0.9em;
+  }
+  
+  .form-group.button-group {
+    text-align: center;
+  }
+  
 }
