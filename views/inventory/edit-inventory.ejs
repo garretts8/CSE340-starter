@@ -14,12 +14,9 @@
     action="/inv/update"
     method="post"
     class="inventory-form"
-    id="inventoryForm"
+    id="updateForm"
   >
     <p>All fields are required</p>
-
-    <!-- Hidden field to store the inventory ID -->
-    <input type="hidden" name="inv_id" value="<%= locals.inv_id || '' %>" />
 
     <div class="form-group">
       <label for="classificationList">Classification:</label>
@@ -66,7 +63,7 @@
         minlength="1"
         class="validation-input"
       >
-<%= locals.inv_description || '' %></textarea
+    <%= locals.inv_description || '' %></textarea
       >
       <span class="field-instructions">Required field</span>
     </div>
@@ -164,14 +161,22 @@
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Update Vehicle</button>
+      <button type="submit" class="btn btn-primary" disabled>
+        Update Vehicle
+      </button>
     </div>
+
+    <!-- Hidden input containing the unique identifier of the inventory item -
+    to store the inventory ID -->
+    <input type="hidden" name="inv_id" value="<%= locals.inv_id || '' %>" />
   </form>
 </div>
 
+<script src="/js/inv-update.js"></script>
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("inventoryForm");
+    const form = document.getElementById("updateForm");
     const inputs = form.querySelectorAll(".validation-input");
     const classificationSelect = document.getElementById("classificationList");
 

@@ -163,4 +163,55 @@ validate.checkInventoryData = async (req, res, next) => {
     next()
 }
 
+/*  **********************************
+ *  Check inventory data and return errors or continue to UPDATE
+ * ********************************* */
+validate.checkUpdateData = async (req, res, next) => {
+    const { inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
+    let errors = validationResult(req)
+    
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        let classificationSelect = await utilities.buildClassificationList(classification_id)
+        
+        // Remove duplicate "Invalid value" messages
+        const errorMap = new Map();
+        errors.array().forEach(error => {
+            // Group by field and keep only the most relevant message
+            if (!errorMap.has(error.path) || 
+                !error.msg.includes('Invalid value')) {
+                errorMap.set(error.path, error);
+            }
+        });
+        
+        const filteredErrors = {
+            ...errors,
+            array: () => Array.from(errorMap.values())
+        }
+
+        res.render("inventory/edit-inventory", {
+            errors: filteredErrors,
+            title: "Edit Inventory",
+            nav,
+            classificationSelect,
+            inv_id,
+            inv_make,
+            inv_model,
+            inv_year,
+            inv_description,
+            inv_image,
+            inv_thumbnail,
+            inv_price,
+            inv_miles,
+            inv_color,
+            classification_id
+        })
+        return
+    }
+    next()
+}
+
+
+
+
 module.exports = validate

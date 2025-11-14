@@ -792,7 +792,7 @@ h1 {
   line-height: 1.5;
 }
 
-/* Classification Select Styling */
+/* Inventory Editing view styling*/
 #classificationList {
   width: 100%;
   padding: 12px;
@@ -1071,5 +1071,5 @@ h1 {
   .form-group.button-group {
     text-align: center;
   }
-  
+
 }
