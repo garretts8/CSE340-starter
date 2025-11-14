@@ -1,0 +1,121 @@
+<% if (title) { %><% } %>
+
+<h1><%= title %></h1>
+<%- messages() %> <% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<div class="form-container">
+  <form
+    action="/inv/delete"
+    method="post"
+    class="inventory-form"
+    id="deleteForm"
+  >
+    <p>Confirm Deletion - The delete is permanent.</p>
+
+    <div class="form-group">
+      <label for="inv_make">Make:</label>
+      <input
+        type="text"
+        id="inv_make"
+        name="inv_make"
+        readonly
+        value="<%= locals.inv_make || '' %>"
+        class="validation-input"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="inv_model">Model:</label>
+      <input
+        type="text"
+        id="inv_model"
+        name="inv_model"
+        readonly
+        value="<%= locals.inv_model || '' %>"
+        class="validation-input"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="inv_year">Year:</label>
+      <input
+        type="number"
+        id="inv_year"
+        name="inv_year"
+        readonly
+        value="<%= locals.inv_year || '' %>"
+        class="validation-input"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="inv_price">Price:</label>
+      <input
+        type="number"
+        id="inv_price"
+        name="inv_price"
+        readonly
+        value="<%= locals.inv_price || '' %>"
+        class="validation-input"
+      />
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-danger">Delete Vehicle</button>
+    </div>
+
+    <!-- Hidden input containing the unique identifier -->
+    <input type="hidden" name="inv_id" value="<%= locals.inv_id || '' %>" />
+  </form>
+</div>
+
+<script src="/js/inv-delete.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("deleteForm");
+    const inputs = form.querySelectorAll(".validation-input");
+
+    // Function to validate a field and apply visual feedback
+    function validateField(field) {
+      // Remove existing validation classes
+      field.classList.remove("valid", "invalid");
+
+      // For input fields, check HTML5 validation
+      if (field.checkValidity()) {
+        field.classList.add("valid");
+      } else {
+        field.classList.add("invalid");
+      }
+    }
+
+    // Add real-time validation to all input fields
+    inputs.forEach((input) => {
+      // Initial validation on page load
+      validateField(input);
+    });
+
+    // Re-validate all fields when form is submitted
+    form.addEventListener("submit", function () {
+      inputs.forEach((input) => {
+        validateField(input);
+      });
+    });
+
+    // Apply initial validation if there were server-side errors
+    const hasServerErrors = document.querySelector(".notice") !== null;
+    if (hasServerErrors) {
+      setTimeout(() => {
+        inputs.forEach((input) => {
+          validateField(input);
+        });
+      }, 100);
+    }
+  });
+</script>
