@@ -1,0 +1,153 @@
+<% if (title) { %><% } %>
+<h1><%= title %></h1>
+<%- messages() %> <% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<div class="form-container">
+  <!-- Account Update Form -->
+  <form action="/account/update" method="post" class="account-form">
+    <h2>Account Update</h2>
+    <p>All fields are required</p>
+
+    <div class="form-group">
+      <label for="account_firstname">First Name:</label>
+      <input
+        type="text"
+        id="account_firstname"
+        name="account_firstname"
+        placeholder="Enter your first name"
+        required
+        minlength="1"
+        value="<%= locals.account_firstname || (locals.accountData ? locals.accountData.account_firstname : '') %>"
+        class="validation-input"
+      />
+      <span class="field-instructions">Required field</span>
+    </div>
+
+    <div class="form-group">
+      <label for="account_lastname">Last Name:</label>
+      <input
+        type="text"
+        id="account_lastname"
+        name="account_lastname"
+        placeholder="Enter your last name"
+        required
+        minlength="1"
+        value="<%= locals.account_lastname || (locals.accountData ? locals.accountData.account_lastname : '') %>"
+        class="validation-input"
+      />
+      <span class="field-instructions">Required field</span>
+    </div>
+
+    <div class="form-group">
+      <label for="account_email">Email Address:</label>
+      <input
+        type="email"
+        id="account_email"
+        name="account_email"
+        placeholder="Enter your email address"
+        required
+        value="<%= locals.account_email || (locals.accountData ? locals.accountData.account_email : '') %>"
+        class="validation-input"
+      />
+      <span class="field-instructions">Required field</span>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Update Account</button>
+    </div>
+
+    <input
+      type="hidden"
+      name="account_id"
+      value="<%= locals.accountData.account_id || '' %>"
+    />
+  </form>
+
+  <!-- Change Password Form -->
+  <form action="/account/update-password" method="post" class="account-form">
+    <h2>Change Password</h2>
+
+    <div class="form-group password-group">
+      <label for="account_password">New Password:</label>
+      <div class="password-input-container">
+        <input
+          type="password"
+          id="account_password"
+          name="account_password"
+          placeholder="Enter new password"
+          pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+          required
+          class="validation-input"
+        />
+        <button
+          type="button"
+          class="btn btn-secondary show-password-btn"
+          onclick="togglePassword('account_password', this)"
+        >
+          Show Password
+        </button>
+      </div>
+      <p class="password-requirements">
+        Passwords must be a minimum of 12 characters and include 1 capital
+        letter, 1 number and 1 special character
+      </p>
+      <p class="field-instructions">
+        Entering a new password will change your current password
+      </p>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Change Password</button>
+    </div>
+
+    <input
+      type="hidden"
+      name="account_id"
+      value="<%= locals.accountData.account_id || '' %>"
+    />
+  </form>
+</div>
+
+<script>
+  function togglePassword(inputId, button) {
+    const input = document.getElementById(inputId);
+    const type = input.getAttribute("type");
+    if (type === "password") {
+      input.setAttribute("type", "text");
+      button.textContent = "Hide Password";
+    } else {
+      input.setAttribute("type", "password");
+      button.textContent = "Show Password";
+    }
+  }
+
+  // Real-time validation
+  document.addEventListener("DOMContentLoaded", function () {
+    const inputs = document.querySelectorAll(".validation-input");
+
+    inputs.forEach((input) => {
+      input.addEventListener("input", function () {
+        this.classList.remove("valid", "invalid");
+        if (this.checkValidity()) {
+          this.classList.add("valid");
+        } else {
+          this.classList.add("invalid");
+        }
+      });
+
+      // Initial validation
+      input.classList.remove("valid", "invalid");
+      if (input.checkValidity()) {
+        input.classList.add("valid");
+      } else {
+        input.classList.add("invalid");
+      }
+    });
+  });
+</script>

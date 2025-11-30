@@ -37,11 +37,29 @@ body {
   text-decoration: none;
 }
 
+.welcome-link {
+  margin-right: 15px;
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+  font-variant-caps: small-caps;
+  transition: color 0.3s ease;
+}
+
+.welcome-link:hover {
+  color: #1ABBDC;
+}
+
 #tools a {
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-variant-caps: small-caps;
   text-decoration: none;
   color: #000;
+  transition: color 0.3s ease;
+}
+
+#tools a:hover {
+  color: #1ABBDC;
 }
 
 main {

@@ -19,25 +19,43 @@ router.get("/error/", utilities.handleErrors(invController.errorRoute));
 
 
 // Route to build management view
-router.get("/", utilities.handleErrors(invController.buildManagement));
+router.get(
+    "/",
+    utilities.checkLogin,
+    utilities.checkAccountType,
+    utilities.handleErrors(invController.buildManagement)
+);
 
 // Route to build add classification view
-router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
+router.get(
+    "/add-classification",
+    utilities.checkLogin,
+    utilities.checkAccountType, 
+    utilities.handleErrors(invController.buildAddClassification)
+);
 
 // Route to process new classification
 router.post(
     "/add-classification",
+    utilities.checkLogin,
+    utilities.checkAccountType,
     validate.classificationRules(),
     validate.checkClassificationData,
     utilities.handleErrors(invController.addClassification)
 );
 
 // Route to build add inventory view
-router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory));
+router.get(
+    "/add-inventory",
+    utilities.checkLogin,
+    utilities.checkAccountType, 
+    utilities.handleErrors(invController.buildAddInventory));
 
 // Route to process new inventory
 router.post(
     "/add-inventory",
+    utilities.checkLogin,
+    utilities.checkAccountType,
     validate.inventoryRules(),
     validate.checkInventoryData,
     utilities.handleErrors(invController.addInventory)
@@ -51,13 +69,17 @@ router.get(
 
 //Build edit inventory view
 router.get(
-    "/edit/:inv_id", 
+    "/edit/:inv_id",
+    utilities.checkLogin,
+    utilities.checkAccountType, 
     utilities.handleErrors(invController.editInventoryView)
 );
 
 // Route to process inventory update
 router.post(
     "/update/",
+    utilities.checkLogin,
+    utilities.checkAccountType,
     validate.inventoryRules(),
     validate.checkUpdateData,
     utilities.handleErrors(invController.updateInventory)
@@ -65,13 +87,17 @@ router.post(
 
 // Route to build delete confirmation view
 router.get(
-    "/delete/:inv_id", 
+    "/delete/:inv_id",
+    utilities.checkLogin,
+    utilities.checkAccountType, 
     utilities.handleErrors(invController.buildDeleteConfirmation)
 );
 
 // Route to process inventory deletion
 router.post(
     "/delete/",
+    utilities.checkLogin,
+    utilities.checkAccountType,
     utilities.handleErrors(invController.deleteInventory)
 );
 
