@@ -32,10 +32,28 @@ invCont.buildByInventoryId = async function (req, res, next) {
   const data = await invModel.getInventoryById(inv_id)
   const detailHTML = await utilities.buildVehicleDetail(data)
   let nav = await utilities.getNav()
+
+   // Check if vehicle is in user's wishlist
+  let wishlistStatus = false
+  if (res.locals.loggedin && res.locals.accountData) {
+    try {
+      const wishlistModel = require("../models/wishlist-model")
+      wishlistStatus = await wishlistModel.isInWishlist(
+        res.locals.accountData.account_id, 
+        inv_id
+      )
+    } catch (error) {
+      console.error("Error checking wishlist status:", error)
+      wishlistStatus = false
+    }
+  }
+
   res.render("./inventory/detail", {
     title: data.inv_year + " " + data.inv_make + " " + data.inv_model,
     nav,
     detailHTML,
+    data,
+    wishlistStatus 
   })
 }
 

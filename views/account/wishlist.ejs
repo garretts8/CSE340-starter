@@ -1,0 +1,101 @@
+<% if (title) { %><% } %>
+
+<h1 class="centered-title"><%= title %></h1>
+<%- messages() %> <% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<div class="wishlist-container centered-content">
+  <% if (locals.accountData) { %>
+  <div class="wishlist-header">
+    <h2 class="welcome-text">My Favorite Vehicles</h2>
+    <% if (wishlistItems.length === 0) { %>
+    <p class="empty-wishlist-message">
+      Your wishlist is empty. Browse vehicles and click "Add to Wishlist" to
+      save them here.
+    </p>
+    <div class="wishlist-actions">
+      <a href="/" class="btn btn-primary">Browse Vehicles</a>
+    </div>
+    <% } else { %>
+    <p class="wishlist-count">
+      You have <%= wishlistItems.length %> saved vehicle<%= wishlistItems.length
+      === 1 ? '' : 's' %>
+    </p>
+    <% } %>
+  </div>
+
+  <% if (wishlistItems.length > 0) { %>
+  <div class="wishlist-items">
+    <% wishlistItems.forEach(item => { %>
+    <div class="wishlist-item">
+      <div class="wishlist-item-image">
+        <a href="/inv/detail/<%= item.inv_id %>">
+          <img
+            src="<%= item.inv_thumbnail %>"
+            alt="<%= item.inv_year %> <%= item.inv_make %> <%= item.inv_model %>"
+            onerror="this.src='/images/vehicles/no-image-tn.png'"
+          />
+        </a>
+      </div>
+
+      <div class="wishlist-item-details">
+        <h3>
+          <a href="/inv/detail/<%= item.inv_id %>">
+            <%= item.inv_year %> <%= item.inv_make %> <%= item.inv_model %>
+          </a>
+        </h3>
+
+        <div class="wishlist-item-info">
+          <div class="info-row">
+            <span class="label">Price:</span>
+            <span class="value"><%= item.formatted_price %></span>
+          </div>
+          <div class="info-row">
+            <span class="label">Miles:</span>
+            <span class="value"><%= item.formatted_miles %></span>
+          </div>
+          <div class="info-row">
+            <span class="label">Color:</span>
+            <span class="value"><%= item.inv_color %></span>
+          </div>
+          <div class="info-row">
+            <span class="label">Saved on:</span>
+            <span class="value"><%= item.formatted_date %></span>
+          </div>
+        </div>
+
+        <div class="wishlist-item-actions">
+          <a href="/inv/detail/<%= item.inv_id %>" class="btn btn-secondary"
+            >View Details</a
+          >
+          <a
+            href="/account/wishlist/remove/<%= item.wishlist_id %>"
+            class="btn btn-danger"
+            onclick="return confirm('Are you sure you want to remove this vehicle from your wishlist?')"
+          >
+            Remove
+          </a>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+
+  <div class="wishlist-actions">
+    <a href="/" class="btn btn-primary">Browse More Vehicles</a>
+    <a href="/account/" class="btn btn-secondary">Back to Account</a>
+  </div>
+  <% } %> <% } else { %>
+  <div class="login-prompt">
+    <h2>Please Log In</h2>
+    <p>You need to be logged in to view your wishlist.</p>
+    <a href="/account/login" class="btn btn-primary">Log In</a>
+    <a href="/account/register" class="btn btn-secondary">Register</a>
+  </div>
+  <% } %>
+</div>

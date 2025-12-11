@@ -1,3 +1,34 @@
 <% if (title) { %>
 <h1><%= title %></h1>
-<% } else { res.redirect('/') } %> <%# messages() %> <%- detailHTML %>
+<% } else { res.redirect('/') } %> <%- messages() %>
+
+<!-- Wishlist button for logged-in users -->
+<% if (locals && locals.loggedin) { %> <% if (wishlistStatus) { %>
+<div class="wishlist-status">
+  <p class="wishlist-notice">
+    This vehicle is already in your <a href="/account/wishlist">wishlist</a>.
+  </p>
+  <a href="/account/wishlist" class="btn btn-secondary">View My Wishlist</a>
+</div>
+<% } else { %>
+<div class="wishlist-action">
+  <% if (data && data.inv_id) { %>
+  <a href="/account/wishlist/add/<%= data.inv_id %>" class="btn btn-primary">
+    Add to Wishlist
+  </a>
+  <% } %>
+  <p class="wishlist-help">Save this vehicle to view later</p>
+</div>
+<% } %> <% } else { %>
+<div class="wishlist-login-prompt">
+  <% if (data && data.inv_id) { %>
+  <a
+    href="/account/login?redirect=/inv/detail/<%= data.inv_id %>"
+    class="btn btn-primary"
+  >
+    Login to Save to Wishlist
+  </a>
+  <% } %>
+  <p class="wishlist-help">Save vehicles you're interested in</p>
+</div>
+<% } %> <%- detailHTML %>

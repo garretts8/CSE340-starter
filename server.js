@@ -19,6 +19,7 @@ const pool = require("./database/")
 const accountRoute = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
+const wishlistRoute = require("./routes/wishlistRoute")
 
 
 /* ***********************
@@ -86,9 +87,12 @@ app.use("/error", errorRoute)
 
 app.use("/account", accountRoute)
 
+app.use("/account", wishlistRoute)
+
 app.use (async(req, res, next) => {
   next({status: 404, message: '<h1>Bummer!! Wrong web page!!</h1><img src="/images/404_image/404-error.png"/>'});
 })
+
 
 /* ***********************
 * Express Error Handler

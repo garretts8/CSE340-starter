@@ -855,6 +855,81 @@ h1 {
   margin-top: 10px;
 }
 
+/* Wishlist Styles */
+.wishlist-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 2px solid #1ABBDC;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.wishlist-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.wishlist-item {
+  border: 2px solid #909596;
+  border-radius: 0.5rem;
+  padding: 20px;
+  background-color: #e6eceebb;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.wishlist-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border-color: #1ABBDC;
+}
+
+.wishlist-item-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.3rem;
+}
+
+.wishlist-item-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 2px solid #909596;
+}
+
+.wishlist-item-actions .btn {
+  flex: 1;
+  text-align: center;
+  padding: 12px 15px;
+  font-size: 0.95em;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  box-shadow: 2px 0px 0px 2px #909596, 0px -2px 0px 2px #d2d8da;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+
+
 @media (max-width: 640px) {
   h1 {
     font-size: 1.8em;
@@ -1036,7 +1111,20 @@ h1 {
     font-size: 1em;
   }
 
+   .wishlist-items {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .wishlist-item-image img {
+    height: 180px;
+  }
+  
+  .wishlist-item-actions {
+    flex-direction: column;
+  }
 }
+
 
 
 
@@ -1088,6 +1176,37 @@ h1 {
   
   .form-group.button-group {
     text-align: center;
+  }
+
+.wishlist-container {
+    padding: 10px;
+  }
+  
+  .wishlist-item {
+    padding: 15px;
+  }
+  
+  .wishlist-item-image img {
+    height: 90px;
+  }
+  
+  .wishlist-item-details h3 {
+    font-size: 1.2em;
+  }
+  
+  .info-row {
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .info-row .label,
+  .info-row .value {
+    width: 100%;
+    text-align: left;
+  }
+  
+  .field-instructions {
+    font-size: 0.75rem;
   }
 
 }
